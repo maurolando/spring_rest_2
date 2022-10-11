@@ -19,29 +19,29 @@ import py.edu.facitec.repository.SuscritoRepository;
 
 @RestController //Arquitectura rest
 
-@RequestMapping("/contactos") //En plural en la parte Servidor. //URL que afecta a todos los métodos
+@RequestMapping("/suscritos") //En plural en la parte Servidor. //URL que afecta a todos los métodos
 public class SuscritoController {
 	@Autowired //Inicializa en el contexto de Spring
-	private SuscritoRepository contactoRepository;
+	private SuscritoRepository suscritoRepository;
 	
 	@GetMapping //Responderá al verbo GET
 	public ResponseEntity<List<Suscrito>>getAll(){
 		//Realizamos la consulta y cargamos el objeto de Suscritos
-		List<Suscrito>contactos = contactoRepository.findAll();
+		List<Suscrito>suscritos = suscritoRepository.findAll();
 		
 		//retornamos la lista con el status
 		
-		return new ResponseEntity<List<Suscrito>>(contactos, HttpStatus.OK);
+		return new ResponseEntity<List<Suscrito>>(suscritos, HttpStatus.OK);
 	}
 		//Sirve para guardar															//
 		@PostMapping												//Datos que vienen del cliente es el objeto request
-		public ResponseEntity<Suscrito> create(@RequestBody Suscrito contactoLlega){
+		public ResponseEntity<Suscrito> create(@RequestBody Suscrito suscritoLlega){
 			try {
-				Suscrito contactoRegistrado = contactoRepository.save(contactoLlega);
+				Suscrito suscritoRegistrado = suscritoRepository.save(suscritoLlega);
 				
-				System.out.println(contactoRegistrado.toString());
+				System.out.println(suscritoRegistrado.toString());
 				
-				return new ResponseEntity<Suscrito>(contactoRegistrado, HttpStatus.OK);
+				return new ResponseEntity<Suscrito>(suscritoRegistrado, HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 		}
@@ -50,10 +50,10 @@ public class SuscritoController {
 	@GetMapping(value = "/{codigo}")		//Cerramos la variable
 	public ResponseEntity<Suscrito> getOne(@PathVariable Long codigo){
 		//Ayuda para trabajar con valores nulos //Consulta por código
-		Optional<Suscrito>contactoConsulta = contactoRepository.findById(codigo);
+		Optional<Suscrito>suscritoConsulta = suscritoRepository.findById(codigo);
 		
-		if(contactoConsulta.isPresent()) {
-			return new ResponseEntity<Suscrito>(contactoConsulta.get(), HttpStatus.OK);
+		if(suscritoConsulta.isPresent()) {
+			return new ResponseEntity<Suscrito>(suscritoConsulta.get(), HttpStatus.OK);
 		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -64,7 +64,7 @@ public class SuscritoController {
 		
 		//Lógica para eliminar a través de una tabla precargada.
 		try {
-			contactoRepository.deleteById(codigo);
+			suscritoRepository.deleteById(codigo);
 			
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {

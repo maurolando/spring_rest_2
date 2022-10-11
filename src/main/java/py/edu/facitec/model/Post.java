@@ -10,15 +10,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity						//Aplicación de la herencia
 public class Post extends General {
-	
+
 	private String titulo;
 	private String autor;
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
 	private LocalDate fecha;
 	private String texto;
-	
+
 	//Uno a muchos		Indicar el objeto post de la otra clase
-						//Aplicar la bidireccionalidad de la relacion
+	//Aplicar la bidireccionalidad de la relacion
 	@JsonManagedReference	//Se visualiza la lista de comentario //Esta lista es importante visualizar
 	@OneToMany(mappedBy = "post")
 	private List<Comentario>comentarios; //Asociación
@@ -69,6 +69,6 @@ public class Post extends General {
 				+ ", comentarios=" + comentarios + ", getId()=" + getId() + ", toString()=" + super.toString()
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
-	
-	
-	}
+
+
+}

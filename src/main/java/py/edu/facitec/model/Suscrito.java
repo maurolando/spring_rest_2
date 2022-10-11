@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Suscrito {
 	
@@ -16,6 +18,7 @@ public class Suscrito {
 	private String nombre;
 	private String correo;
 	
+	@JsonIgnore //Cuando la lista no es importante
 	@OneToMany(mappedBy = "suscrito")
 	private List<Comentario>comentarios;
 
