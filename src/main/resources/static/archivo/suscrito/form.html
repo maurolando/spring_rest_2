@@ -104,7 +104,9 @@
            suscritos:[] //Inicializamos el vector de suscritos
         },
         created(){
-        	
+        	console.log(localStorage.getItem("token"));
+            Vue.axios.defaults.headers.common['Authorization'] ='Bearer '+ localStorage.getItem("token");
+
 
         },
         mounted() {//Cuando se monta  el DOM
@@ -122,7 +124,7 @@
             	
             	//}
             
-            	Vue.axios.post(this.apiURL + '/suscritos',suscrito)
+            	Vue.axios.post(this.apiURL + 'suscritos',suscrito)
           	  .then(response => {
           		
           		  console.log('Registro exitoso');
@@ -136,7 +138,7 @@
             },
             //Metodo para obtener los suscritos
             getSuscritos() {
-            	Vue.axios.get(this.apiURL + '/suscritos')
+            	Vue.axios.get(this.apiURL + 'suscritos')
             	  .then(response => {
             		  this.suscritos = response.data;
             		  //Sirve para crear una lista

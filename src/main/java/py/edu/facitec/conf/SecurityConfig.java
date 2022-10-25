@@ -33,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/");
 		web.ignoring().antMatchers("/autenticar"); //No es necesario loguearse a estas URL's
-		web.ignoring().antMatchers(HttpMethod.GET,"/form");
-		web.ignoring().antMatchers("/lib/**");
+		web.ignoring().antMatchers(HttpMethod.GET,"/form");  
+		web.ignoring().antMatchers("/lib/**"); //Mediante esto se habilita la utilizacion de las librerias
 		web.ignoring().antMatchers("/**/**.ico**");
 		
 	}
